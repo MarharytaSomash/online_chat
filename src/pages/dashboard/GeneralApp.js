@@ -1,14 +1,26 @@
-import React, { Suspense, lazy } from "react";
+import React, { lazy } from "react";
 import Chats from "./Chats";
-const Cat = lazy(() => import("../../components/Cat"));
+import { Stack, Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+
+import Conversation from "../../components/Conversation";
 
 const GeneralApp = () => {
+    const theme = useTheme();
     return (
-        <>
-            {/* <Suspense direction="row" sx={{ width: "100%" }} fallback="Loading..."> */}
+        <Stack direction="row" sx={{ width: "100%" }}>
             <Chats />
-            {/* </Suspense> */}
-        </>
+            <Box
+                sx={{
+                    height: "100%",
+                    width: "100%",
+                    backgroundColor:
+                        theme.palette.mode === "light" ? "#fff" : theme.palette.background.default,
+                }}
+            >
+                <Conversation />
+            </Box>
+        </Stack>
     );
 };
 

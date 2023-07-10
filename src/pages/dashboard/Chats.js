@@ -70,7 +70,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
                         <Typography variant="subtitle2"> {name}</Typography>
                         <Typography variant="caption"> {msg}</Typography>
                     </Stack>
-                    <Stack spacing={2} alignItems="center">
+                    <Stack spacing={1} alignItems="center">
                         <Typography sx={{ fontWeight: 600 }} variant="caption ">
                             {time}
                         </Typography>
@@ -86,12 +86,12 @@ const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: 20,
     backgroundColor: alpha(theme.palette.background.default, 1),
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
+    marginRight: theme.spacing(3),
+    marginLeft: 1,
     width: "100%",
 }));
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 31),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -123,6 +123,7 @@ function Chats() {
             <Stack p={3} sx={{ height: "100%" }}>
                 <Stack direction="row" alignItems={"center"} justifyContent="space-between">
                     <Typography variant="h5">Chat</Typography>
+
                     <IconButton>
                         <CircleDashed />
                     </IconButton>
