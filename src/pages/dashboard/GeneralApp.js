@@ -15,7 +15,9 @@ const GeneralApp = () => {
                     height: "100%",
                     width: "100%",
                     backgroundColor:
-                        theme.palette.mode === "light" ? "#fff" : theme.palette.background.default,
+                        theme.palette.mode === "light"
+                            ? "#F0F4FA"
+                            : theme.palette.background.default,
                 }}
             >
                 <Conversation />
