@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { Box, Stack, IconButton, Avatar, Divider } from "@mui/material";
+import { Box, Stack, IconButton, Avatar, Divider, MenuItem, Menu } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import AntSwitch from "../../components/AntSwitch";
 import useSettings from "../../hooks/useSettings";
 import Logo from "../../assets/Images/logo.ico";
-import { Nav_Buttons } from "../../data";
+import { Nav_Buttons, Profile_Menu } from "../../data";
 import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
 
 function SideBar() {
     const theme = useTheme();
     const [active, setActive] = useState();
-    const [selected, setSelected] = useState(0);
     const { onToggleMode } = useSettings();
+    const [anchorEl, setAnchorEl] = useState(null);
+    const ITEM_HEIGHT = 48;
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     return (
         <Box
             p={2}
@@ -109,7 +117,62 @@ function SideBar() {
                         }}
                         defaultChecked
                     />
-                    <Avatar src={faker.image.avatar()} />
+                    <IconButton
+                        aria-label="more"
+                        id="long-button"
+                        aria-controls={open ? "long-menu" : undefined}
+                        aria-expanded={open ? "true" : undefined}
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                    >
+                        <Avatar id="long-button" src={faker.image.avatar()} />
+                    </IconButton>
+                    <Menu
+                        id="long-menu"
+                        MenuListProps={{
+                            "aria-labelledby": "long-button",
+                        }}
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        PaperProps={{
+                            style: {
+                                maxHeight: ITEM_HEIGHT * 4.5,
+                                width: "20ch",
+                            },
+                        }}
+                        anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "left",
+                        }}
+                        transformOrigin={{
+                            vertical: "bottom",
+                            horizontal: "left",
+                        }}
+                    >
+                        <Stack spacing={1} px={1}>
+                            {Profile_Menu.map((el) => {
+                                return (
+                                    <MenuItem
+                                        key={el.title}
+                                        onClick={() => {
+                                            handleClick();
+                                        }}
+                                    >
+                                        <Stack
+                                            sx={{ width: 100 }}
+                                            direction={"row"}
+                                            alignItems={"center"}
+                                            justifyContent={"space-between"}
+                                        >
+                                            <span> {el.title}</span>
+                                            {el.icon}
+                                        </Stack>
+                                    </MenuItem>
+                                );
+                            })}
+                        </Stack>
+                    </Menu>
                 </Stack>
             </Stack>
         </Box>
