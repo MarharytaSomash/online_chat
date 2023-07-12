@@ -143,7 +143,7 @@ function SideBar() {
                         }}
                         anchorOrigin={{
                             vertical: "bottom",
-                            horizontal: "left",
+                            horizontal: "right",
                         }}
                         transformOrigin={{
                             vertical: "bottom",
