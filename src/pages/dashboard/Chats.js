@@ -89,9 +89,12 @@ const Search = styled("div")(({ theme }) => ({
     marginRight: theme.spacing(3),
     marginLeft: 1,
     width: "100%",
+    "& .MuiInputBase-input::placeholder": {
+        paddingLeft: theme.spacing(5),
+    },
 }));
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 31),
+    padding: theme.spacing(0, 2),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -160,7 +163,6 @@ function Chats() {
                         {ChatList.filter((el) => el.pinned).map((el, index) => {
                             return <ChatElement key={index} {...el} />;
                         })}
-                        {/* </Stack> */}
 
                         <Stack direction="column">
                             <Stack spacing={2.4}>

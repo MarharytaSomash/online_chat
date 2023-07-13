@@ -20,3 +20,15 @@ const slice = createSlice({
     },
 });
 export default slice.reducer;
+
+export const ToggleSidebar = () => {
+    return async () => {
+        dispatch(slice.actions.toggleSidebar());
+    };
+};
+
+export const UpdateSidebar = (type) => {
+    return async () => {
+        dispatch(slice.actions.updateSidebar({ type }));
+    };
+};
