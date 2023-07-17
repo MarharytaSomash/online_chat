@@ -1,17 +1,87 @@
-import React from "react";
-import { Avatar, Box, Button, Divider, IconButton, Stack, Typography } from "@mui/material";
+import React, { useState } from "react";
+import {
+    Avatar,
+    Box,
+    Button,
+    Divider,
+    IconButton,
+    Stack,
+    Typography,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+    Slide,
+} from "@mui/material";
 import { useTheme } from "@emotion/react";
-
 import { Bell, CaretRight, Phone, Prohibit, Star, Trash, VideoCamera, X } from "phosphor-react";
 import { useDispatch } from "react-redux";
-import { ToggleSidebar } from "../Redux/slices/app";
+import { ToggleSidebar, UpdateSidebar } from "../Redux/slices/app";
 import { faker } from "@faker-js/faker";
 import AntSwitch from "./AntSwitch";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const BlockDialog = ({ open, handleClose }) => {
+    return (
+        <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+        >
+            <DialogTitle>{"Block this contact"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                    Are you sure you want to block this contact?
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>Yes</Button>
+            </DialogActions>
+        </Dialog>
+    );
+};
+const DeleteDialog = ({ open, handleClose }) => {
+    return (
+        <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+        >
+            <DialogTitle>{"Delete this chat"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                    Are you sure you want to delete this chat?
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>Delete</Button>
+            </DialogActions>
+        </Dialog>
+    );
+};
 
 function Contact() {
     const theme = useTheme();
     const dispatch = useDispatch();
+    const [openBlock, setOpenBlock] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false);
 
+    const handleBlock = () => {
+        setOpenBlock(false);
+    };
+    const handleDelete = () => {
+        setOpenDelete(false);
+    };
     return (
         <Box sx={{ width: 500, height: "100%" }}>
             <Stack sx={{ height: "100%" }}>
@@ -89,7 +159,14 @@ function Contact() {
                         justifyContent={"space-between"}
                     >
                         <Typography variant="subtitle2">Media,Links & Docs</Typography>
-                        <Button endIcon={<CaretRight />}>401</Button>
+                        <Button
+                            onClick={() => {
+                                dispatch(UpdateSidebar("SHARED"));
+                            }}
+                            endIcon={<CaretRight />}
+                        >
+                            401
+                        </Button>
                     </Stack>
                     <Stack direction={"row"} alignItems={"center"} spacing={2}>
                         {[1, 2, 3].map((el) => {
@@ -106,7 +183,11 @@ function Contact() {
                             <Star size={23} />
                             <Typography variant="subtitle2"> Starred Messeges</Typography>
                         </Stack>
-                        <IconButton>
+                        <IconButton
+                            onClick={() => {
+                                dispatch(UpdateSidebar("STARRED"));
+                            }}
+                        >
                             <CaretRight />
                         </IconButton>
                     </Stack>
@@ -127,15 +208,31 @@ function Contact() {
                         <Typography variant="caption">Margharyta,Olga,Helen</Typography>
                     </Stack>
                     <Stack direction={"row"} alignItems={"center"} spacing={2}>
-                        <Button startIcon={<Prohibit />} fullWidth variant="outlined">
+                        <Button
+                            onClick={() => {
+                                setOpenBlock(true);
+                            }}
+                            startIcon={<Prohibit />}
+                            fullWidth
+                            variant="outlined"
+                        >
                             Block
                         </Button>
-                        <Button startIcon={<Trash />} fullWidth variant="outlined">
+                        <Button
+                            onClick={() => {
+                                setOpenDelete(true);
+                            }}
+                            startIcon={<Trash />}
+                            fullWidth
+                            variant="outlined"
+                        >
                             Delete
                         </Button>
                     </Stack>
                 </Stack>
             </Stack>
+            {openBlock && <BlockDialog open={openBlock} handleClose={handleBlock} />}
+            {openDelete && <DeleteDialog open={openDelete} handleClose={handleDelete} />}
         </Box>
     );
 }

@@ -26,7 +26,7 @@ const TimeLine = ({ el }) => {
     );
 };
 
-function ReplyMessege({ el }) {
+function ReplyMessege({ el, menu }) {
     const theme = useTheme();
 
     return (
@@ -65,13 +65,13 @@ function ReplyMessege({ el }) {
                         </Typography>
                     </Stack>
                 </Box>
-                <MenuOptions />
+                {menu && <MenuOptions />}
             </Stack>
         </>
     );
 }
 
-function LinkMessege({ el }) {
+function LinkMessege({ el, menu }) {
     const theme = useTheme();
 
     return (
@@ -123,12 +123,12 @@ function LinkMessege({ el }) {
                         </Stack>
                     </Stack>
                 </Box>
-                <MenuOptions />
+                {menu && <MenuOptions />}
             </Stack>
         </>
     );
 }
-function ImgMessege({ el }) {
+function ImgMessege({ el, menu }) {
     const theme = useTheme();
     return (
         <>
@@ -154,13 +154,13 @@ function ImgMessege({ el }) {
                         {el.message}
                     </Typography>
                 </Box>
-                <MenuOptions />
+                {menu && <MenuOptions />}
             </Stack>
         </>
     );
 }
 
-function TextMessege({ el }) {
+function TextMessege({ el, menu }) {
     const theme = useTheme();
     return (
         <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -178,12 +178,12 @@ function TextMessege({ el }) {
                     {el.message}
                 </Typography>
             </Box>
-            <MenuOptions />
+            {menu && <MenuOptions />}
         </Stack>
     );
 }
 
-function DocumentMessege({ el }) {
+function DocumentMessege({ el, menu }) {
     const theme = useTheme();
 
     return (
@@ -224,7 +224,7 @@ function DocumentMessege({ el }) {
                         </Typography>
                     </Stack>
                 </Box>
-                <MenuOptions />
+                {menu && <MenuOptions />}
             </Stack>
         </>
     );

@@ -10,7 +10,7 @@ import {
     DocumentMessege,
 } from "./TypeMessege";
 
-function Message() {
+function Message({ menu }) {
     return (
         <Box p={3}>
             <Stack spacing={3}>
@@ -21,15 +21,15 @@ function Message() {
                         case "msg":
                             switch (el.subtype) {
                                 case "img":
-                                    return <ImgMessege el={el} />;
+                                    return <ImgMessege el={el} menu={menu} />;
                                 case "doc":
-                                    return <DocumentMessege el={el} />;
+                                    return <DocumentMessege el={el} menu={menu} />;
                                 case "link":
-                                    return <LinkMessege el={el} />;
+                                    return <LinkMessege el={el} menu={menu} />;
                                 case "reply":
-                                    return <ReplyMessege el={el} />;
+                                    return <ReplyMessege el={el} menu={menu} />;
                                 default:
-                                    return <TextMessege el={el} />;
+                                    return <TextMessege el={el} menu={menu} />;
                             }
                             break;
                         default:

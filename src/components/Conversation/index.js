@@ -9,7 +9,7 @@ const Conversation = () => {
         <Stack height="100%" width="100%">
             <Header />
             <Box width="100%" sx={{ flexGrow: 1, height: "100%", overflowY: "scroll" }}></Box>
-            <Message />
+            <Message menu={true} />
             <Footer />
         </Stack>
     );
