@@ -6,6 +6,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import MainLayout from "../layouts/main";
 import ResetPassword from "../pages/auth/ResetPassword";
 import NewPassword from "../pages/auth/NewPassword";
+import Group from "../pages/dashboard/Group";
 
 const Loadable = (Component) => (props) => {
     return (
@@ -35,6 +36,7 @@ export default function Router() {
                 { element: <Navigate to={DEFAULT_PATH} replace />, index: true },
                 { path: "app", element: <GeneralApp /> },
                 { path: "settings", element: <Settings /> },
+                { element: <Group />, path: "group" },
                 { path: "404", element: <Page404 /> },
                 { path: "*", element: <Navigate to="/404" replace /> },
             ],
@@ -49,5 +51,6 @@ const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));
 const RegisterPage = Loadable(lazy(() => import("../pages/auth/Register")));
 const ResetPasswordPage = Loadable(lazy(() => import("../pages/auth/ResetPassword")));
 const NewPasswordPage = Loadable(lazy(() => import("../pages/auth/NewPassword")));
+const GroupPage = Loadable(lazy(() => import("../pages/dashboard/Group")));
 
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));
