@@ -1,88 +1,3 @@
-// import React from "react";
-// import { Box, Divider, IconButton, Link, Stack, Typography } from "@mui/material";
-// import { Search, SearchIconWrapper, StyledInputBase } from "../../components/Search";
-// import { MagnifyingGlass, Plus } from "phosphor-react";
-// import { useTheme } from "@emotion/react";
-// import { SimpleBarStyle } from "../../components/Scrollbar";
-// import { ChatList } from "../../data";
-// import ChatElement from "./Chats";
-
-// function Group() {
-//     const theme = useTheme();
-//     return (
-//         <>
-//             <Stack direction={"row"} sx={{ with: "100%" }}>
-//                 <Box
-//                     sx={{
-//                         height: "100vh",
-//                         backgroundColor: (theme) =>
-//                             theme.palette.mode === "light" ? "#F8FAFF" : theme.palette.background,
-//                         width: 380,
-//                         boxShadow: "0px 0px 2px rgba(0,0,0, 0.25",
-//                     }}
-//                 >
-//                     <Stack p={3} spacing={2} sx={{ maxHeight: "100vh" }}>
-//                         <Stack>
-//                             <Typography variant="h5"> Groups </Typography>
-//                         </Stack>
-//                         <Stack sx={{ width: "100%" }}>
-//                             <Search>
-//                                 <SearchIconWrapper>
-//                                     <MagnifyingGlass color="#709CE6" />
-//                                 </SearchIconWrapper>
-//                                 <StyledInputBase
-//                                     placeholder="Search..."
-//                                     inputProps={{ "aria-label": "search" }}
-//                                 />
-//                             </Search>
-//                             <Stack
-//                                 direction={"row"}
-//                                 justifyContent={"space-between"}
-//                                 sx={{ mt: 4 }}
-//                             >
-//                                 <Typography variant="subtitle2" component={Link}>
-//                                     Create New Group
-//                                 </Typography>
-//                                 <IconButton>
-//                                     <Plus style={{ color: theme.palette.primary.main }} />
-//                                 </IconButton>
-//                             </Stack>
-//                             <Divider />
-//                             <Stack
-//                                 sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}
-//                                 spacing={3}
-//                             >
-//                                 <SimpleBarStyle timeout={500} clickOnTrack={false}>
-//                                     <Stack spacing={2.4}>
-//                                         <Typography variant="subtitle2" sx={{ color: "#676667" }}>
-//                                             {" "}
-//                                             Pinned{" "}
-//                                         </Typography>
-
-//                                         {ChatList.filter((el) => el.pinned).map((el, index) => {
-//                                             return <ChatElement key={index} {...el} />;
-//                                         })}
-//                                     </Stack>
-//                                     <Stack spacing={2.4}>
-//                                         <Typography variant="subtitle2" sx={{ color: "#676667" }}>
-//                                             {" "}
-//                                             All Chats{" "}
-//                                         </Typography>
-//                                         {ChatList.filter((el) => !el.pinned).map((el, index) => {
-//                                             return <ChatElement key={index} {...el} />;
-//                                         })}
-//                                     </Stack>
-//                                 </SimpleBarStyle>
-//                             </Stack>
-//                         </Stack>
-//                     </Stack>
-//                 </Box>
-//             </Stack>
-//         </>
-//     );
-// }
-
-// export default Group;
 import React, { useState } from "react";
 import { Box, Stack, Typography, IconButton, Link, Divider } from "@mui/material";
 import { MagnifyingGlass, Plus } from "phosphor-react";
@@ -91,7 +6,7 @@ import { SimpleBarStyle } from "../../components/Scrollbar";
 import { ChatList } from "../../data";
 import ChatElement from "../../components/ChatElement";
 import { Search, SearchIconWrapper, StyledInputBase } from "../../components/Search";
-// import CreateGroup from "../../sections/dashboard/CreateGroup";
+import CreateGroup from "../../sections/main/CreateGroup";
 
 const Group = () => {
     const [openDialog, setOpenDialog] = useState(false);
@@ -173,7 +88,7 @@ const Group = () => {
 
                 {/* Right */}
             </Stack>
-            {/* {openDialog && <CreateGroup open={openDialog} handleClose={handleCloseDialog} />} */}
+            {openDialog && <CreateGroup open={openDialog} handleClose={handleCloseDialog} />}
         </>
     );
 };

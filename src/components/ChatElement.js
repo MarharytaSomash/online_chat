@@ -1,4 +1,3 @@
-import InputBase from "@mui/material/InputBase";
 import { faker } from "@faker-js/faker";
 import Avatar from "@mui/material/Avatar";
 import { useTheme } from "@mui/material/styles";
