@@ -7,14 +7,43 @@ import Logo from "../../assets/Images/logo.ico";
 import { Nav_Buttons, Profile_Menu } from "../../data";
 import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
+import { useNavigate } from "react-router-dom";
+
+const getPath = (index) => {
+    switch (index) {
+        case 0:
+            return "/app";
+        case 1:
+            return "/group";
+        case 2:
+            return "/call";
+        case 3:
+            return "/settings";
+        default:
+            return "/";
+    }
+};
+
+const getMenuPath = (index) => {
+    switch (index) {
+        case 0:
+            return "/profile";
+        case 1:
+            return "/settings";
+        case 2:
+            return "auth/login";
+    }
+};
 
 function SideBar() {
     const theme = useTheme();
-    const [active, setActive] = useState();
+    const [active, setActive] = useState(0);
     const { onToggleMode } = useSettings();
     const [anchorEl, setAnchorEl] = useState(null);
     const ITEM_HEIGHT = 48;
     const open = Boolean(anchorEl);
+    const navigate = useNavigate();
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -66,7 +95,10 @@ function SideBar() {
                                 >
                                     <IconButton
                                         sx={{ width: "max-content", color: "#fff" }}
-                                        onClick={() => setActive(el.index)}
+                                        onClick={() => {
+                                            setActive(el.index);
+                                            navigate(getPath(el.index));
+                                        }}
                                     >
                                         {el.icon}
                                     </IconButton>
@@ -81,7 +113,10 @@ function SideBar() {
                                                 : theme.palette.text.primary,
                                     }}
                                     key={el.index}
-                                    onClick={() => setActive(el.index)}
+                                    onClick={() => {
+                                        setActive(el.index);
+                                        navigate(getPath(el.index));
+                                    }}
                                 >
                                     {el.icon}
                                 </IconButton>
@@ -95,7 +130,12 @@ function SideBar() {
                                     borderRadius: 1.5,
                                 }}
                             >
-                                <IconButton sx={{ width: "max-content", color: "#fff" }}>
+                                <IconButton
+                                    sx={{ width: "max-content", color: "#fff" }}
+                                    onClick={() => {
+                                        navigate(getPath(3));
+                                    }}
+                                >
                                     <Gear />
                                 </IconButton>
                             </Box>
@@ -103,6 +143,7 @@ function SideBar() {
                             <IconButton
                                 onClick={() => {
                                     setActive(3);
+                                    navigate(getPath(3));
                                 }}
                             >
                                 <Gear />
@@ -151,7 +192,7 @@ function SideBar() {
                         }}
                     >
                         <Stack spacing={1} px={1}>
-                            {Profile_Menu.map((el) => {
+                            {Profile_Menu.map((el, index) => {
                                 return (
                                     <MenuItem
                                         key={el.title}
@@ -164,6 +205,9 @@ function SideBar() {
                                             direction={"row"}
                                             alignItems={"center"}
                                             justifyContent={"space-between"}
+                                            onClick={() => {
+                                                navigate(getMenuPath(index));
+                                            }}
                                         >
                                             <span> {el.title}</span>
                                             {el.icon}
